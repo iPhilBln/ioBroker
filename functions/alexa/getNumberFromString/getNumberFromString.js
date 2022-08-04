@@ -101,7 +101,7 @@ for(let word in arrWords){
   if(activationWord) { return -1; }
 
   //hundert als erstes Wort erkennen
-  if(firstWord && num == 0) {result = 1; firstWord = false; }
+  if(firstWord && num == 0) { result = 1; firstWord = false; }
 
   //hunderter Block extrahieren
   if(hun) { result *= 100; hun = false; }
