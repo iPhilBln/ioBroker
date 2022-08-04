@@ -19,11 +19,11 @@ let result = 0;
 
 arrWords = wert.split(' ');
 
-for(let word in arrWords){
+for(let word in arrWords) {
 
   num = 0;
 
-  switch(arrWords[word]){
+  switch(arrWords[word]) {
     case '':
       activationWord = true; break;
     case 'milliarde':
@@ -101,11 +101,11 @@ for(let word in arrWords){
   if(activationWord) { return -1; }
 
   //hundert als erstes Wort erkennen
-  if(firstWord && num == 0) {result = 1; firstWord = false; }
+  if(firstWord && num == 0) { result = 1; firstWord = false; }
 
   //hunderter Block extrahieren
   if(hun) { result *= 100; hun = false; }
-  else if(num > -1){ result += num; firstWord = false; }
+  else if(num > -1) { result += num; firstWord = false; }
 
   //Exponenten vom hunderter Block ermitteln
   if(tsd) { numTsd = result * 1000 ; result = 0; tsd = false; }
