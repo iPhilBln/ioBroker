@@ -36,6 +36,8 @@ for(let word in arrWords) {
       tsd = true; break;
     case 'hundert':
       hun = true; break;
+    case 'null':
+      num = 0; break;
     case 'ein':
     case 'eine':
     case 'eins':
@@ -60,7 +62,7 @@ for(let word in arrWords) {
     case 'zehn':
       num = 10; break;
     case 'elf':
-      numm = 11; break;
+      num = 11; break;
     case 'zwölf':
       num = 12; break;
     case 'dreizehn':
