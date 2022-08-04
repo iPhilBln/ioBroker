@@ -1,9 +1,10 @@
 //Eingabe Alexa: drei hundert zwei und vierzig milliarden neun hundert sieben und achtzig tausend drei hundert sieben und vierzig
 //IN: string from summary DP
-//OUT: number from string
+//OUT: number from string (if string is empty: -1)
 
 let arrWords;
 let firstWord = true;
+let activationWord = false;
 
 let mrd = false;
 let mio = false;
@@ -19,9 +20,16 @@ let result = 0;
 arrWords = wert.split(' ');
 
 for(let word in arrWords){
+
+  num = 0;
+
   switch(arrWords[word]){
+    case '':
+      activationWord = true; break;
+    case 'milliarde':
     case 'milliarden':
       mrd = true; break;
+    case 'million':
     case 'millionen':
       mio = true; break;
     case 'tausend':
@@ -85,14 +93,19 @@ for(let word in arrWords){
       num = 80; break;
     case 'neunzig':
       num = 90; break;
+    default:
+      num = -1;
   }
+
+  //Aktivierungswort erkennen
+  if(activationWord) { return -1; }
 
   //hundert als erstes Wort erkennen
   if(firstWord && num == 0) {result = 1; firstWord = false; }
 
   //hunderter Block extrahieren
-  if(!hun) { result += num; num = 0; }
-  else { result *= 100; hun = false; }
+  if(hun) { result *= 100; hun = false; }
+  else if(num > -1){ result += num; firstWord = false; }
 
   //Exponenten vom hunderter Block ermitteln
   if(tsd) { numTsd = result * 1000 ; result = 0; tsd = false; }
