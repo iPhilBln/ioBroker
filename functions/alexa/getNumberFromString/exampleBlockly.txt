@@ -1,0 +1,38 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="{h^s,-tgeld%uXQpxLsR">wert</variable>
+  </variables>
+  <block type="procedures_defcustomreturn" id="53QR[Mqj#u@Oh7f@Vr5K" x="113" y="37">
+    <mutation statements="false">
+      <arg name="wert" varid="{h^s,-tgeld%uXQpxLsR"></arg>
+    </mutation>
+    <field name="NAME">getNumber</field>
+    <field name="SCRIPT">Ly9FaW5nYWJlIEFsZXhhOiBkcmVpIGh1bmRlcnQgendlaSB1bmQgdmllcnppZyBtaWxsaWFyZGVuIG5ldW4gaHVuZGVydCBzaWViZW4gdW5kIGFjaHR6aWcgdGF1c2VuZCBkcmVpIGh1bmRlcnQgc2llYmVuIHVuZCB2aWVyemlnCi8vSU46IHN0cmluZyBmcm9tIHN1bW1hcnkgRFAKLy9PVVQ6IG51bWJlciBmcm9tIHN0cmluZwoKbGV0IGFycldvcmRzOwpsZXQgZmlyc3RXb3JkID0gdHJ1ZTsKCmxldCBtcmQgPSBmYWxzZTsKbGV0IG1pbyA9IGZhbHNlOwpsZXQgdHNkID0gZmFsc2U7CmxldCBodW4gPSBmYWxzZTsKCmxldCBudW0gPSAwOwpsZXQgbnVtTXJkID0gMDsKbGV0IG51bU1pbyA9IDA7CmxldCBudW1Uc2QgPSAwOwpsZXQgcmVzdWx0ID0gMDsKCmFycldvcmRzID0gd2VydC5zcGxpdCgnICcpOwoKZm9yKGxldCB3b3JkIGluIGFycldvcmRzKXsKICBzd2l0Y2goYXJyV29yZHNbd29yZF0pewogICAgY2FzZSAnbWlsbGlhcmRlbic6CiAgICAgIG1yZCA9IHRydWU7IGJyZWFrOwogICAgY2FzZSAnbWlsbGlvbmVuJzoKICAgICAgbWlvID0gdHJ1ZTsgYnJlYWs7CiAgICBjYXNlICd0YXVzZW5kJzoKICAgICAgdHNkID0gdHJ1ZTsgYnJlYWs7CiAgICBjYXNlICdodW5kZXJ0JzoKICAgICAgaHVuID0gdHJ1ZTsgYnJlYWs7CiAgICBjYXNlICdlaW4nOgogICAgY2FzZSAnZWluZSc6CiAgICBjYXNlICdlaW5zJzoKICAgICAgbnVtID0gMTsgYnJlYWs7CiAgICBjYXNlICd6d28nOgogICAgY2FzZSAnendlaSc6CiAgICAgIG51bSA9IDI7IGJyZWFrOwogICAgY2FzZSAnZHJlaSc6CiAgICAgIG51bSA9IDM7IGJyZWFrOwogICAgY2FzZSAndmllcic6CiAgICAgIG51bSA9IDQ7IGJyZWFrOwogICAgY2FzZSAnZsO8bmYnOgogICAgICBudW0gPSA1OyBicmVhazsKICAgIGNhc2UgJ3NlY2hzJzoKICAgICAgbnVtID0gNjsgYnJlYWs7CiAgICBjYXNlICdzaWViZW4nOgogICAgICBudW0gPSA3OyBicmVhazsKICAgIGNhc2UgJ2FjaHQnOgogICAgICBudW0gPSA4OyBicmVhazsKICAgIGNhc2UgJ25ldW4nOgogICAgICBudW0gPSA5OyBicmVhazsKICAgIGNhc2UgJ3plaG4nOgogICAgICBudW0gPSAxMDsgYnJlYWs7CiAgICBjYXNlICdlbGYnOgogICAgICBudW1tID0gMTE7IGJyZWFrOwogICAgY2FzZSAnenfDtmxmJzoKICAgICAgbnVtID0gMTI7IGJyZWFrOwogICAgY2FzZSAnZHJlaXplaG4nOgogICAgICBudW0gPSAxMzsgYnJlYWs7CiAgICBjYXNlICd2aWVyemVobic6CiAgICAgIG51bSA9IDE0OyBicmVhazsKICAgIGNhc2UgJ2bDvG5memVobic6CiAgICAgIG51bSA9IDE1OyBicmVhazsKICAgIGNhc2UgJ3NlY2hzemVobic6CiAgICAgIG51bSA9IDE2OyBicmVhazsKICAgIGNhc2UgJ3NpZWJ6ZWhuJzoKICAgICAgbnVtID0gMTc7IGJyZWFrOwogICAgY2FzZSAnYWNodHplaG4nOgogICAgICBudW0gPSAxODsgYnJlYWs7CiAgICBjYXNlICduZXVuemVobic6CiAgICAgIG51bSA9IDE5OyBicmVhazsKICAgIGNhc2UgJ3p3YW53emlnJzoKICAgICAgbnVtID0gMjA7IGJyZWFrOwogICAgY2FzZSAnZHJlacOfaWcnOgogICAgICBudW0gPSAzMDsgYnJlYWs7CiAgICBjYXNlICd2aWVyemlnJzoKICAgICAgbnVtID0gNDA7IGJyZWFrOwogICAgY2FzZSAnZsO8bmZ6aWcnOgogICAgICBudW0gPSA1MDsgYnJlYWs7CiAgICBjYXNlICdzZWNoemlnJzoKICAgICAgbnVtID0gNjA7IGJyZWFrOwogICAgY2FzZSAnc2llYnppZyc6CiAgICAgIG51bSA9IDcwOyBicmVhazsKICAgIGNhc2UgJ2FjaHR6aWcnOgogICAgICBudW0gPSA4MDsgYnJlYWs7CiAgICBjYXNlICduZXVuemlnJzoKICAgICAgbnVtID0gOTA7IGJyZWFrOwogIH0KCiAgLy9odW5kZXJ0IGFscyBlcnN0ZXMgV29ydCBlcmtlbm5lbgogIGlmKGZpcnN0V29yZCAmJiBudW0gPT0gMCkge3Jlc3VsdCA9IDE7IGZpcnN0V29yZCA9IGZhbHNlOyB9CgogIC8vaHVuZGVydGVyIEJsb2NrIGV4dHJhaGllcmVuCiAgaWYoIWh1bikgeyByZXN1bHQgKz0gbnVtOyBudW0gPSAwOyB9CiAgZWxzZSB7IHJlc3VsdCAqPSAxMDA7IGh1biA9IGZhbHNlOyB9CgogIC8vRXhwb25lbnRlbiB2b20gaHVuZGVydGVyIEJsb2NrIGVybWl0dGVsbgogIGlmKHRzZCkgeyBudW1Uc2QgPSByZXN1bHQgKiAxMDAwIDsgcmVzdWx0ID0gMDsgdHNkID0gZmFsc2U7IH0KICBlbHNlIGlmIChtaW8pIHsgbnVtTWlvID0gcmVzdWx0ICogMTAwMDAwMDsgcmVzdWx0ID0gMDsgbWlvID0gZmFsc2U7IH0KICBlbHNlIGlmIChtcmQpIHsgbnVtTXJkID0gcmVzdWx0ICogMTAwMDAwMDAwMDsgcmVzdWx0ID0gMDsgbXJkID0gZmFsc2U7IH0KfQoKcmV0dXJuIG51bU1yZCArIG51bU1pbyArIG51bVRzZCArIHJlc3VsdDsK</field>
+    <comment pinned="false" h="80" w="160">Beschreibe diese Funktion …</comment>
+  </block>
+  <block type="on" id="Ed93%dP)1t~jM-z4,amR" inline="true" x="112" y="88">
+    <field name="OID">alexa2.0.History.summary</field>
+    <field name="CONDITION">ne</field>
+    <field name="ACK_CONDITION"></field>
+    <statement name="STATEMENT">
+      <block type="debug" id="`kIodpm[F|^hXK7Dp`$c">
+        <field name="Severity">log</field>
+        <value name="TEXT">
+          <shadow type="text" id="U0jP=DK5TzNw1S{*a[O{">
+            <field name="TEXT">test</field>
+          </shadow>
+          <block type="procedures_callcustomreturn" id="YJ,O(5`yQ6epS?%}fhN2">
+            <mutation name="getNumber">
+              <arg name="wert"></arg>
+            </mutation>
+            <value name="ARG0">
+              <block type="on_source" id="g1fh?{D-)a7-/YE2iI_s">
+                <field name="ATTR">state.val</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+</xml>
