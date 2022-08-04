@@ -77,7 +77,7 @@ for(let word in arrWords) {
       num = 18; break;
     case 'neunzehn':
       num = 19; break;
-    case 'zwanwzig':
+    case 'zwanzig':
       num = 20; break;
     case 'dreißig':
       num = 30; break;
