@@ -1,10 +1,10 @@
 //Eingabe Alexa: drei hundert zwei und vierzig milliarden neun hundert sieben und achtzig tausend drei hundert sieben und vierzig
 //IN: string from summary DP
-//OUT: number from string (if string is empty: -1)
+//OUT: number from string (if no number is detected: -1)
 
 let arrWords;
 let firstWord = true;
-let activationWord = false;
+let containsNumber = false;
 
 let mrd = false;
 let mio = false;
@@ -17,15 +17,13 @@ let numMio = 0;
 let numTsd = 0;
 let result = 0;
 
-arrWords = wert.split(' ');
+arrWords = strWords.split(' ');
 
-for(let word in arrWords) {
+for(let i = 0; i < arrWords.length; i++) {
 
   num = 0;
 
-  switch(arrWords[word]) {
-    case '':
-      activationWord = true; break;
+  switch(arrWords[i]) {
     case 'milliarde':
     case 'milliarden':
       mrd = true; break;
@@ -38,7 +36,6 @@ for(let word in arrWords) {
       hun = true; break;
     case 'null':
       num = 0; break;
-    case 'ein':
     case 'eine':
     case 'eins':
       num = 1; break;
@@ -99,15 +96,12 @@ for(let word in arrWords) {
       num = -1;
   }
 
-  //Aktivierungswort erkennen
-  if(activationWord) { return -1; }
-
   //hundert als erstes Wort erkennen
-  if(firstWord && num == 0) { result = 1; firstWord = false; }
+  if(firstWord && arrWords[i] != 'null' && num == 0) { result = 1; firstWord = false; }
 
   //hunderter Block extrahieren
-  if(hun) { result *= 100; hun = false; }
-  else if(num > -1) { result += num; firstWord = false; }
+  if(hun) { result *= 100; hun = false; containsNumber = true; }
+  else if(num > -1) { result += num; firstWord = false; containsNumber = true; }
 
   //Exponenten vom hunderter Block ermitteln
   if(tsd) { numTsd = result * 1000 ; result = 0; tsd = false; }
@@ -115,4 +109,5 @@ for(let word in arrWords) {
   else if (mrd) { numMrd = result * 1000000000; result = 0; mrd = false; }
 }
 
+if(!containsNumber) return -1;
 return numMrd + numMio + numTsd + result;
