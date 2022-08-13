@@ -1,0 +1,17 @@
+{
+  "date": "13. August 2022",
+  "devices": [
+    {
+      "name": "ATV Wohnzimmer",
+      "id": "5L6HJL5673",
+      "companion": "example_dsgfjkldfghkljgfdh543",
+      "airplay": "example_sdfkj43545lk4k5j2ö54",
+    },
+    {
+      "name": "ATV Schlafzimmer",
+      "id": "HJ56JL56",
+      "companion": "example_adskfhfdg435kl",
+      "airplay": "example_adskfdfsff65756kl",
+    }
+  ]
+}
