@@ -3,7 +3,7 @@
 
 class AppleTv {
 
-  constructor(name, id, airplayCredentials, companionCredentials){
+  constructor(id, name, airplayCredentials, companionCredentials){
     this.id = id;
     this.name = name;
     this.airplayCredentials = airplayCredentials;
@@ -64,6 +64,7 @@ class AppleTv {
 
     if(app != undefined) this.#setApp(app);
 
+    console.log(this.command);
     exec(this.command);
   }
 
@@ -99,4 +100,11 @@ atvSchlafzimmer.setChannel('off');
 
 on({id: 'Alexa2.History.summary', change: 'ne'}, function(dp){
   let strIn = dp.state.val;
+
+  /* only Demo
+  if(strIn.includes('magenta')){
+    if(strIn.includes('on')) atvWohnzimmer.setChannel('on', 'dazn');
+    else if(strIn.includes('off')) atvWohnzimmer.setChannel('off');
+  }
+  */
 })
