@@ -69,11 +69,11 @@ class AppleTv {
 
   toString(){
     return  '{' +
-            'name: ' + this.name +
-            ', id: ' + this.id +
-            ', airplayCredentials: ' + this.airplayCredentials +
-            ', companionCredentials: 'this.companionCredentials +
-            '}';
+            '"name": "' + this.name +
+            '", "id": "' + this.id +
+            '", "airplayCredentials": "' + this.airplayCredentials +
+            '", "companionCredentials": "' + this.companionCredentials +
+            '" }';
   }
 }
 
@@ -94,7 +94,7 @@ airplayCredentials = configJson.devices[1].airplay;
 companionCredentials = configJson.devices[1].companion;
 let atvSchlafzimmer = new AppleTv(id, name, airplayCredentials, companionCredentials);
 
-console.log(atvSchlafzimmer);
+console.log(atvSchlafzimmer.toString());
 atvSchlafzimmer.setChannel('off');
 
 on({id: 'Alexa2.History.summary', change: 'ne'}, function(dp){
