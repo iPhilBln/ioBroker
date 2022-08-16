@@ -1,69 +1,73 @@
 // device.0 : ATV Wohnzimmer
 // device.1 : ATV Schlafzimmer
 
+const pathToConfig = '0_userdata.0.apple_tv.config';
+const username = 'iobroker';
+const pathAtvRemoteModule = '';
+const debug = true;
+
+/*----------==========Ende der Einstellungen==========----------*/
+
 class AppleTv {
 
-  constructor(id, name, airplayCredentials, companionCredentials){
+  constructor(username, id, name, airplayCredentials, companionCredentials){
     this.id = id;
     this.name = name;
+    this.arrApps = [];
+    this.username = username;
+    //this.pathToPythonModule = '';
     this.airplayCredentials = airplayCredentials;
     this.companionCredentials = companionCredentials;
   }
 
-  /** Mögliche Kommandos für das Apple TV **/
-  #setState(state){
-    switch(state){
-      case 'on':
-        this.command += 'turn_on '; break;
-      case 'off':
-        this.command += 'turn_off'; break;
-      case 'play':
-        this.command += 'play'; break;
-      case 'pause':
-        this.command += 'pause'; break;
-      case 'next':
-        this.command += 'next';
-    }
-  }
-
-  /** Hier alle möglichen Apps mit zugehörigen Link eintragen **/
-  #setApp(app){
-    this.command += 'launch_app=';
-    switch(app){
-      case 'magenta':
-        this.command += 'de.telekom.entertaintv-iphone'; break;
-      case 'dazn':
-        this.command += 'com.dazn.theApp'; break;
-      case 'disney plus':
-        this.command += 'com.disney.disneyplus'; break;
-      case 'sky':
-        this.command += 'com.bskyb.skyqms'; break;
-      case 'prime':
-        this.command += 'com.amazon.aiv.AIVApp'; break;
-      case 'netflix':
-        this.command += 'com.netflix.Netflix'; break;
-      case 'youtube':
-        this.command += 'com.google.ios.youtube'; break;
-      case 'spotify':
-        this.command += 'com.spotify.client'
-    }
-  }
-
-  #generateDefaultCommand(){
-    this.command = 'atvremote '
+  #setDefaultCommand(){
+    this.command = 'python 3 ' + this.pathToPythonModule + ' '
                  + '--id ' + this.id + ' '
                  + '--airplay-credentials ' + this.airplayCredentials + ' '
                  + '--companion-credentials ' + this.companionCredentials + ' ';
   }
 
-  setChannel(state, app){
-    this.#generateDefaultCommand();
+  /** Mögliche Kommandos für das Apple TV **/
+  #setState(state){
+    switch(state){
+      case 'ein':
+      case 'an':
+        this.command += 'turn_on '; break;
+      case 'aus':
+        this.command += 'turn_off'; break;
+      case 'spiele':
+        this.command += 'play'; break;
+      case 'pausiere':
+        this.command += 'pause'; break;
+      case 'nächste':
+        this.command += 'next';
+    }
+  }
 
-    if(state == 'on') this.#setState('on');
-    else this.#setState('off');
+  setUsername(username){ this.username = username; }
 
-    if(app != undefined) this.#setApp(app);
+  setArrApps(objApp) { this.arrApps.push(objApp); }
 
+  setPathToPythonSkript(update, path){
+    if(update || path == ''){
+      exec(`find /home/${this.username}/.local/lib/ -name atvremote.py`, async function(error, result, stderr){
+  		    let path = result.split('\n');
+          if(path.length > 0) this.pathToPythonModule = path[0];
+          else console.log('Es konnte kein Skript gefunden werden.');
+      });
+    } else this.pathToPythonModule = path;
+    if(this.debug) console.log(this.pathToPythonModule);
+  }
+
+  setChannel(strIn){
+    const dictCmd = ['ein', 'an', 'aus', 'pausiere', 'nächste']
+    for(let i = 0; i < this.arrApps.length; i++){
+      if(strIn.contains(this.arrApps[i].name)){
+        this.#setDefaultCommand();
+        for(let i = 0; i < dictCmd.length; i++) if(strIn.conatains(dictCmd[i])) this.#setState(dictCmd[i]);
+        this.command += 'launch_app=' + this.arrApps[i].link;
+      }
+    }
     console.log(this.command);
     exec(this.command);
   }
@@ -74,37 +78,58 @@ class AppleTv {
             '", "id": "' + this.id +
             '", "airplayCredentials": "' + this.airplayCredentials +
             '", "companionCredentials": "' + this.companionCredentials +
+            '", "apps": "' + this.arrApps +
+            '", "username": "' + this.username +
+            '", "pathToPythonSkript": "' + this.pathToPythonModule +
             '" }';
   }
 }
 
-const pathToConfig = '0_userdata.0.apple_tv.config';
+/*----------========== Hauptprogramm ==========----------*/
 
-let id, name, airplayCredentials, companionCredentials;
-let configJson = JSON.parse(getState(pathToConfig).val);
+let id, name, arrApps, airplayCredentials, companionCredentials;
+let atvDevices;
 
-id = configJson.devices[0].id;
-name = configJson.devices[0].name;
-airplayCredentials = configJson.devices[0].airplay;
-companionCredentials = configJson.devices[0].companion;
-let atvWohnzimmer = new AppleTv(id, name, airplayCredentials, companionCredentials);
+function createDevices(obj){
+  atvDevices = [];
+  for(let i = 0; i < obj.devices.length; i++){
+    atvDevices[i] = new AppleTv(  username,
+                                  obj.devices[i].id,
+                                  obj.devices[i].name,
+                                  obj.devices[i].apps,
+                                  obj.devices[i].airplay,
+                                  obj.devices[i].companion);
+    //for(let j = 0; j < obj.devices[i].apps.length; j++){ helper.setArrApps(JSON.parse(obj.devices[i].apps[j]));}
+    atvDevices[i].setPathToPythonSkript(false, pathAtvRemoteModule);
+    if(debug) console.log(obj.devices[i].apps);
+    if(debug) console.log('created Device: ' + atvDevices[i].toString());
+  }
+}
 
-id = configJson.devices[1].id;
-name = configJson.devices[1].name;
-airplayCredentials = configJson.devices[1].airplay;
-companionCredentials = configJson.devices[1].companion;
-let atvSchlafzimmer = new AppleTv(id, name, airplayCredentials, companionCredentials);
+function selectDevice(deviceName, strIn){
+  for(let i = 0; i < atvDevices.length; i++){
+    if(deviceName == atvDevices[i].name) device.setChannel(strIn);
+    if (debug) console.log('selectDevice: ' + atvDevices[i].toString());
+    break;
+  }
+}
 
-console.log(atvSchlafzimmer.toString());
-atvSchlafzimmer.setChannel('off');
+createDevices(JSON.parse(getState(pathToConfig).val));
+
+on({id: pathToConfig, change:'ne'}, function(dp){
+  try{ createDevices(JSON.parse(dp.state.val)); }
+  catch(err) { console.log('Objekte konnten nicht erstellt werden: ' + err);}
+});
 
 on({id: 'Alexa2.History.summary', change: 'ne'}, function(dp){
-  let strIn = dp.state.val;
+  selectDevice('ATV Schlafzimmer', dp.state.val); // only Demo
 
   /* only Demo
   if(strIn.includes('magenta')){
     if(strIn.includes('on')) atvWohnzimmer.setChannel('on', 'dazn');
     else if(strIn.includes('off')) atvWohnzimmer.setChannel('off');
   }
-  */
-})
+*/
+
+
+});
