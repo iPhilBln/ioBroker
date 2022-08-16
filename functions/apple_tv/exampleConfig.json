@@ -6,12 +6,44 @@
       "id": "5L6HJL5673",
       "companion": "example_dsgfjkldfghkljgfdh543",
       "airplay": "example_sdfkj43545lk4k5j2ö54",
+		  "apps": [
+			{
+				"name": "magenta",
+				"link": "this.axample.com"
+			},
+			{
+				"name": "dazn",
+				"link": "this.example2.com"
+			}
+		]
     },
     {
       "name": "ATV Schlafzimmer",
       "id": "HJ56JL56",
       "companion": "example_adskfhfdg435kl",
       "airplay": "example_adskfdfsff65756kl",
+  		"apps": [
+  			{
+  				"name": "magenta",
+  				"link": "this.axample.com"
+  			},
+  			{
+  				"name": "dazn",
+  				"link": "this.example2.com"
+  			}
+  		]
     }
   ]
+}
+
+
+
+"apps": {
+  "magenta": "de.telekom.entertaintv-iphone",
+  "dazn": "com.dazn.theApp",
+  "disney plus": "com.disney.disneyplus",
+  "prime": "com.amazon.aiv.AIVApp",
+  "netflix": "com.netflix.Netflix",
+  "youtube": "com.google.ios.youtube",
+  "spotify": "com.spotify.client"
 }
