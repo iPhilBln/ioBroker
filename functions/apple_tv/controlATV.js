@@ -10,12 +10,11 @@ const debug = true;
 
 class AppleTv {
 
-  constructor(username, id, name, arrApps, airplayCredentials, companionCredentials, pathToPythonModule){
+  constructor(username, id, name, arrApps, airplayCredentials, companionCredentials){
     this.id = id;
     this.name = name;
     this.arrApps = arrApps;
     this.username = username;
-    this.pathToPythonModule = pathToPythonModule;
     this.airplayCredentials = airplayCredentials;
     this.companionCredentials = companionCredentials;
   }
@@ -39,25 +38,25 @@ class AppleTv {
         }
     }
 
-    var os = new os_func();
+    let os = new os_func();
 
     let testPath = (cmd) => {
       os.execCommand(cmd, function (returnvalue) {
         let path = returnvalue.split('\n');
         console.log('testPath() path: ' + path[0]);
-        //this.pathToPythonModule = path[0];        <- wieso funktioniert das nicht?
+        //this.pathToPythonModule = path[0];        //<- wieso funktioniert das nicht?
         return path[0];
       });
     }
 
     console.log('testPath(): ' + testPath(findPathCmd));
 
-    let runExec = (cmd) => {
+    let runExec = (this, cmd) => {
       exec(cmd, async function (error, result, stderr) {
         let path = result.split('\n');
           if(path.length > 0) {
             console.log('runExec() path: ' + path[0]);
-            //this.pathToPythonModule = path[0];        <- wieso funktioniert das nicht?
+            //this.pathToPythonModule = path[0];       // <- wieso funktioniert das nicht?
             return path[0];
           }
           else console.log('Es konnte kein Skript gefunden werden.');
@@ -66,28 +65,13 @@ class AppleTv {
 
     console.log('runExec(): ' + runExec(findPathCmd));
 
-    this.pathToPythonModule = testPath(findPathCmd);   //<- wieso funktioniert das nicht?
+    //this.pathToPythonModule = testPath(findPathCmd);   //<- wieso funktioniert das nicht?
     //this.pathToPythonModule = runExec(findPathCmd);   //<- wieso funktioniert das nicht?
-    //
+
     if(update || path == 'default'){
 
+      //hier this.pathToPythonModule setzten
 
-
-      /*
-      let execResult;
-      exec(cmd, function (error, result, stderr) {
-  		  let path = result.split('\n');
-          if(path.length > 0) {
-            console.log('path: ' + path[0] + '; type: ' + typeof(path[0]));
-            console.log('attPath type: ' + typeof(this.pathToPythonModule));
-            execResult = path[0];
-            //this.pathToPythonModule = test;
-          }//this.pathToPythonModule = path[0]; }//wieso funktioniert diese Zeile nicht?
-          else console.log('Es konnte kein Skript gefunden werden.');
-      });
-      this.pathToPythonModule = execResult;
-
-      console.log('result was: ' + this.pathToPythonModule);*/
     } else this.pathToPythonModule = path;
 
   }
@@ -160,21 +144,15 @@ async function createDevices(obj){
                                   obj.devices[i].name,
                                   obj.devices[i].apps,
                                   obj.devices[i].airplay,
-                                  obj.devices[i].companion,
-                                  pathAtvRemoteModule);
-    //for(let j = 0; j < obj.devices[i].apps.length; j++){ helper.setArrApps(JSON.parse(obj.devices[i].apps[j]));}
-    /*
-    exec(`find /home/${username}/.local/lib/ -name atvremote.py `, function (error, result, stderr) {
-        let path = result.split('\n');
-        if(path.length > 0) { atvDevices[i].setPathToPythonModule(false, path[0]); console.log(atvDevices[i].pathToPythonModule); }
-        else console.log('Es konnte kein Skript gefunden werden.');
-    });
-    */
+                                  obj.devices[i].companion);
+
     atvDevices[i].setPathToPythonModule(false, pathAtvRemoteModule);
-    const showObjects = () => {
+
+    let showObjects = () => {
       if(debug) console.log('created Device: ' + atvDevices[i].toString());
       if(debug) console.log('app: ' + atvDevices[i].arrApps[0].name);
     }
+
     setTimeout(showObjects, 3000);
   }
 }
@@ -190,8 +168,7 @@ function selectDevice(deviceName, strIn){
 createDevices(JSON.parse(getState(pathToConfig).val));
 
 on({id: pathToConfig, change:'ne'}, function(dp){
-  try{ createDevices(JSON.parse(dp.state.val)); }
-  catch(err) { console.log('Objekte konnten nicht erstellt werden: ' + err);}
+  createDevices(JSON.parse(dp.state.val));
 });
 
 on({id: 'alexa2.0.History.summary', change: 'ne'}, function(dp){
