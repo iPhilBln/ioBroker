@@ -51,7 +51,7 @@ class AppleTv {
 
     console.log('testPath(): ' + testPath(findPathCmd));
 
-    let runExec = (this, cmd) => {
+    let runExec = (cmd) => {
       exec(cmd, async function (error, result, stderr) {
         let path = result.split('\n');
           if(path.length > 0) {
